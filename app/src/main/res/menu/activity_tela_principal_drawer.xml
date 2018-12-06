@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/inicio_item"
+                android:title="Inicio"
+                />
+        <item
+                android:id="@+id/perfil_item"
+                android:title="Perfil"/>
+        <item
+                android:id="@+id/meus_livros_item"
+                android:title="Meus Livros"/>
+        <item
+                android:id="@+id/categorias_item"
+                android:title="Categorias"/>
+
+        <item
+                android:id="@+id/his_transacoes_item"
+                android:title="Historico de Transações"/>
+    </group>
+
+</menu>
