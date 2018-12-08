@@ -48,10 +48,11 @@ public class CadastroActivity extends AppCompatActivity {
         String senha = String.valueOf(ed_senha.getText());
 
         if(Util.validarEditText(edits)){
-        Usuario usuario = new Usuario(nome, sobrenome, email , nomeUsuario, telefone, senha);
-        UsuarioDomain.criar(usuario);
-        Intent intent = new Intent(this,LoginActivity.class);
-        startActivity(intent);
+            Usuario usuario = new Usuario(nome, sobrenome, email , nomeUsuario, telefone, senha);
+            UsuarioDomain.criar(usuario);
+            Intent intent = new Intent(this,LoginActivity.class);
+            startActivity(intent);
+            finishAffinity();
         }
     }
 }

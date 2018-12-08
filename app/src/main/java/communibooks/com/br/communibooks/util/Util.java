@@ -10,7 +10,7 @@ public class Util {
         for(EditText ed:edits){
             if (ed.getText().toString().length() == 0) {
                 ed.setError("Tem que preencher animal");
-                b =false;
+                b = false;
             }
         }
 

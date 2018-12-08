@@ -15,5 +15,16 @@ public class UsuarioDao {
         return usuarios;
     }
 
+    public static Usuario findByNomeUsuario(String nomeUsuario){
+        Usuario usuario = null;
+        for(Usuario u:usuarios){
+            if(u.getNomeUsuario().equals(nomeUsuario)){
+               usuario = u;
+            }
+        }
+
+        return usuario;
+    }
+
 
 }

@@ -9,4 +9,14 @@ public class UsuarioDomain {
             UsuarioDao.add(usuario);
     }
 
+    public static boolean autenticar(Usuario usuario){
+        Usuario u = UsuarioDao.findByNomeUsuario(usuario.getNome());
+        if(u!= null){
+            if(u.getSenha().equals(usuario)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
