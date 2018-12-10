@@ -6,7 +6,12 @@ import java.util.ArrayList;
 
 public class LivroDao {
     private static ArrayList<Livro> livros = new ArrayList<>();
-    public static void add(Livro livro){
+
+    public static void add(Livro livro) {
         livros.add(livro);
+    }
+
+    public static ArrayList<Livro> getLivros() {
+        return livros;
     }
 }

@@ -10,13 +10,12 @@ public class UsuarioDomain {
     }
 
     public static boolean autenticar(Usuario usuario){
-        Usuario u = UsuarioDao.findByNomeUsuario(usuario.getNome());
+        Usuario u = UsuarioDao.findByNomeUsuario(usuario.getNomeUsuario());
         if(u!= null){
-            if(u.getSenha().equals(usuario)){
+            if(u.getSenha().equals(usuario.getSenha())){
                 return true;
             }
         }
         return false;
     }
-
 }

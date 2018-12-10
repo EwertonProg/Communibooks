@@ -1,10 +1,8 @@
 package communibooks.com.br.communibooks.model;
 
-import android.media.Image;
-
 public class Categoria {
     private String nome;
-    private Image imagem;
+    private String imagem;
 
     public Categoria() {
     }
@@ -17,11 +15,11 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public Image getImagem() {
+    public String getImagem() {
         return imagem;
     }
 
-    public void setImagem(Image imagem) {
+    public void setImagem(String imagem) {
         this.imagem = imagem;
     }
 }
