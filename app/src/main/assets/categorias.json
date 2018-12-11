@@ -1,0 +1,28 @@
+{
+  "Categorias":[
+    {
+      "nome":"Ação",
+      "imagem":"https://img.icons8.com/metro/52/000000/doctor-fate-helmet.png"
+    },
+    {
+      "nome":"Didático",
+      "imagem":"https://img.icons8.com/material/96/000000/student-center.png"
+    },
+    {
+      "nome":"Biografia",
+      "imagem":"https://img.icons8.com/ios/96/000000/quill-with-ink-filled.png"
+    },
+    {
+      "nome":"Literatura Brasileira",
+      "imagem":"https://img.icons8.com/ios/100/000000/mustache-filled.png"
+    },
+    {
+      "nome":"Terror",
+      "imagem":"https://img.icons8.com/ios/96/000000/zombie-filled.png"
+    },
+    {
+      "nome":"Fantasia",
+      "imagem":"https://img.icons8.com/ios/96/000000/vampire-filled.png"
+    }
+  ]
+}

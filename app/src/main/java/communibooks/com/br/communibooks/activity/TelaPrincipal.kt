@@ -12,18 +12,19 @@ import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
 import communibooks.com.br.communibooks.R
 import communibooks.com.br.communibooks.dao.CategoriaDao
 import communibooks.com.br.communibooks.dao.UsuarioDao
-import communibooks.com.br.communibooks.domain.UsuarioDomain
 import communibooks.com.br.communibooks.model.Categoria
 import communibooks.com.br.communibooks.model.Usuario
 import communibooks.com.br.communibooks.util.CategoriaAdapter
-import communibooks.com.br.communibooks.util.Util
 import kotlinx.android.synthetic.main.activity_tela_principal.*
 import kotlinx.android.synthetic.main.app_bar_tela_principal.*
 import kotlinx.android.synthetic.main.nav_header_tela_principal.*
+import com.google.gson.JsonParser
+import com.google.gson.Gson
+import java.io.*
+
 
 class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var usuarioLogado: Usuario
@@ -38,20 +39,31 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         setSupportActionBar(toolbar)
 
 
+        lateinit var categoria: Categoria
+        val br = BufferedReader( InputStreamReader(assets.open("categorias.json")))
+        val gson = Gson()
+        val jp = JsonParser()
+        val je = jp.parse(br)
+        val jobj = je.getAsJsonObject()
+        val ja = jobj.getAsJsonArray("Categorias")
 
+        for (i in 0 until ja.size() - 1) {
+            categoria = gson.fromJson<Categoria>(ja.get(i), Categoria::class.java)
+            Log.d("json",categoria.nome)
+            Log.d("json",categoria.imagem)
+            CategoriaDao.add(categoria)
+        }
         viewManager = GridLayoutManager(this,2)
         recyclerView = findViewById(R.id.recycler_categoria_tela_principal)
         viewAdapter = CategoriaAdapter(contexto = this, lista = CategoriaDao.categorias, layout = R.layout.categoria_item){
             categoria ->  i.putExtra("categoria", categoria.nome)
         }
+        recyclerView.adapter = viewAdapter
+        recyclerView.layoutManager = viewManager
 
-        usuarioLogado = UsuarioDao.findByNomeUsuario(intent.getStringExtra("usuarioLogado"))
+       // usuarioLogado = UsuarioDao.findByNomeUsuario(intent.getStringExtra("usuarioLogado"))
 
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar,
@@ -75,7 +87,7 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.tela_principal, menu)
-        tv_nome_menu.setText(usuarioLogado.nome+" "+usuarioLogado.sobrenome)
+        //tv_nome_menu.setText(usuarioLogado.nome+" "+usuarioLogado.sobrenome)
         return true
     }
 

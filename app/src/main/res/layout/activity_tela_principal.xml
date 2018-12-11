@@ -22,6 +22,7 @@
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/nav_header_tela_principal"
             app:menu="@menu/activity_tela_principal_drawer"
+            android:background="@color/cor_padrao"
             />
 
 </android.support.v4.widget.DrawerLayout>

@@ -17,6 +17,8 @@
     <TextView android:id="@+id/tv_nome_categoria_recycle"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
+              android:textSize="50sp"
+              android:textAlignment="center"
               android:text="Ação"
               app:layout_constraintStart_toStartOf="@id/img_icone_categoria_recycle"
               app:layout_constraintEnd_toEndOf="@id/img_icone_categoria_recycle"

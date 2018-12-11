@@ -2,6 +2,7 @@ package communibooks.com.br.communibooks.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import communibooks.com.br.communibooks.R
 
 class ListaLivrosPesquisaActivity : AppCompatActivity() {
 
