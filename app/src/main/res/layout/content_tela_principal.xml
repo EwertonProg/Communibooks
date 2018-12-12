@@ -17,7 +17,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="recycler_categoria_tela_principal"
+            app:layout_constraintBottom_toTopOf="@id/recycler_categoria_tela_principal"
             android:id="@+id/pesquisa_categoria"
             android:background="@android:color/background_light"
             />

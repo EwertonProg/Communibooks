@@ -12,7 +12,7 @@
                app:layout_constraintTop_toTopOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintBottom_toTopOf="tv_nome_categoria_recycle"
+               app:layout_constraintBottom_toTopOf="@id/tv_nome_categoria_recycle"
     />
 
     <TextView android:id="@+id/tv_nome_categoria_recycle"
@@ -21,9 +21,9 @@
               android:textSize="30sp"
               android:textAlignment="center"
               android:text="Ação"
-              app:layout_constraintStart_toStartOf="img_icone_categoria_recycle"
-              app:layout_constraintEnd_toEndOf="img_icone_categoria_recycle"
-              app:layout_constraintTop_toBottomOf="img_icone_categoria_recycle"
+              app:layout_constraintStart_toStartOf="@id/img_icone_categoria_recycle"
+              app:layout_constraintEnd_toEndOf="@id/img_icone_categoria_recycle"
+              app:layout_constraintTop_toBottomOf="@id/img_icone_categoria_recycle"
               app:layout_constraintBottom_toBottomOf="parent"
 
     />
