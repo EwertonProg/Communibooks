@@ -6,7 +6,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.CadastroActivity"
-        android:background="@color/cor_padrao">
+        android:background="@color/cor_padrao"
+        android:textAlignment="center">
+
     <ImageView android:id="@+id/img_cadastro_cadastro"
                android:layout_width="230dp"
                android:layout_height="144dp"
@@ -22,26 +24,24 @@
               android:layout_height="@dimen/editText_height"
               android:inputType="textPersonName"
               android:hint="@string/nome"
-              app:layout_constraintTop_toBottomOf="parent"
-              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/img_cadastro_cadastro"
+              app:layout_constraintStart_toStartOf="@id/img_cadastro_cadastro"
               app:layout_constraintEnd_toStartOf="@id/ed_sobrenome_cadastro"
-              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintBottom_toTopOf="@id/ed_usuario_cadastro"
               android:background="@android:color/background_light"
-              app:layout_constraintHorizontal_bias="0.9"
-              app:layout_constraintVertical_bias="0.092"/>
+              app:layout_constraintVertical_bias="0.0"/>
 
     <EditText android:id="@+id/ed_sobrenome_cadastro"
               android:layout_width="121dp"
               android:layout_height="@dimen/editText_height"
               android:inputType="textPersonName"
               android:hint="@string/sobrenome"
-              app:layout_constraintTop_toBottomOf="parent"
-              app:layout_constraintStart_toEndOf="parent"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/img_cadastro_cadastro"
+              app:layout_constraintStart_toEndOf="@id/ed_nome_cadastro"
+              app:layout_constraintEnd_toEndOf="@id/img_cadastro_cadastro"
+              app:layout_constraintBottom_toTopOf="@id/ed_usuario_cadastro"
               android:background="@android:color/background_light"
-              app:layout_constraintHorizontal_bias="2.45"
-              app:layout_constraintVertical_bias="0.092"/>
+              />
 
     <EditText android:id="@+id/ed_usuario_cadastro"
               android:layout_width="250dp"
@@ -50,7 +50,7 @@
               android:hint="@string/usuario"
               app:layout_constraintTop_toBottomOf="@id/ed_nome_cadastro"
               app:layout_constraintStart_toStartOf="@id/ed_nome_cadastro"
-              app:layout_constraintEnd_toEndOf="@id/imgbtn_imagem_livro_cadastro"
+              app:layout_constraintEnd_toEndOf="@id/ed_sobrenome_cadastro"
               app:layout_constraintBottom_toTopOf="@id/ed_email_cadastro"
               android:background="@android:color/background_light"
               app:layout_constraintVertical_chainStyle="spread"/>

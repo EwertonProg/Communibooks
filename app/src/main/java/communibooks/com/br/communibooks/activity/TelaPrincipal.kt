@@ -24,7 +24,6 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private lateinit var i: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +36,10 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         viewManager = GridLayoutManager(this,2)
         recyclerView = findViewById(R.id.recycler_categoria_tela_principal)
         viewAdapter = CategoriaAdapter(contexto = this, lista = CategoriaDao.categorias, layout = R.layout.categoria_item){
-            categoria ->  i.putExtra("categoria", categoria.nome)
+            categoria ->  val i: Intent = Intent(this, ListaLivrosPesquisaActivity::class.java)
+            i.putExtra("categoria", categoria.nome)
             i.putExtra("usuarioLogado", usuarioLogado.nomeUsuario)
+
             startActivity(i)
         }
         recyclerView.adapter = viewAdapter
@@ -84,7 +85,8 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
+        lateinit var i:Intent
+
         when (item.itemId) {
             R.id.inicio_item -> {
                 // Handle the camera action
@@ -93,7 +95,9 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
             }
             R.id.meus_livros_item -> {
-
+                i = Intent(this,CadastrarLivroActivity::class.java)
+                i.putExtra("usuarioLogado", usuarioLogado.nomeUsuario)
+                startActivity(i)
             }
             R.id.categorias_item -> {
 

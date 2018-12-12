@@ -7,7 +7,8 @@
         android:layout_height="match_parent"
         tools:showIn="@layout/app_bar_tela_principal"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".activity.TelaPrincipal" android:background="@color/cor_padrao">
+        tools:context=".activity.TelaPrincipal"
+        android:background="@color/cor_padrao">
 
 
     <SearchView
@@ -16,7 +17,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/recycler_categoria_tela_principal"
+            app:layout_constraintBottom_toTopOf="recycler_categoria_tela_principal"
             android:id="@+id/pesquisa_categoria"
             android:background="@android:color/background_light"
             />
