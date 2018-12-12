@@ -13,8 +13,7 @@ class CategoriaAdapter(
     val lista: List<Categoria>,
     val contexto: Context,
     val layout: Int,
-    val listner: (Categoria) -> Unit
-) : RecyclerView.Adapter<CategoriaAdapter.CategoriaHolder>() {
+    val listner: (Categoria) -> Unit) : RecyclerView.Adapter<CategoriaAdapter.CategoriaHolder>() {
 
     inner class CategoriaHolder(categoriaItemView: View) : RecyclerView.ViewHolder(categoriaItemView) {
         val nomeCategoria = itemView.tv_nome_categoria_recycle
