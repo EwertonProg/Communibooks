@@ -35,7 +35,7 @@ class CategoriaAdapter(
 
     override fun onBindViewHolder(holder: CategoriaHolder, position: Int) {
         holder.nomeCategoria.text = lista[position].nome
-        Picasso.get().load(lista[position].imagem).resizeDimen(150,150).into(holder.iconeCategoria)
+        Picasso.get().load(lista[position].imagem).into(holder.iconeCategoria)
     }
 
     override fun getItemCount() = lista.size

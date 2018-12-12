@@ -25,7 +25,7 @@ public class CadastroActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ed_nome = findViewById(R.id.ed_nome_cadastro);
-        ed_sobrenome = findViewById(R.id.ed_sobrenome_cadastro);
+        ed_sobrenome = findViewById(R.id.img_cadastro_cadastro);
         ed_nomeUsuario = findViewById(R.id.ed_usuario_cadastro);
         ed_email = findViewById(R.id.ed_email_cadastro);
         ed_telefone = findViewById(R.id.ed_celular_cadastro);

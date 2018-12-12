@@ -24,4 +24,7 @@
     <string name="nome">Nome</string>
     <string name="sobrenome">Sobrenome</string>
     <string name="mascara_num_tel">(__)_____-____</string>
+    <string name="descricao">Descrição</string>
+    <string name="categoria">Categoria</string>
+    <string name="situacao">Situação</string>
 </resources>

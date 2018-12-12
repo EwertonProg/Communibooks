@@ -1,12 +1,12 @@
 package communibooks.com.br.communibooks.model;
 
-import android.media.Image;
+import android.graphics.drawable.Drawable;
 
 public class Livro {
     private Integer id;
     private String nome;
     private Categoria categoria;
-    private Image imagem;
+    private Drawable imagem;
     private String descrição;
     private Usuario usuario;
     private Situacao situacao;
@@ -40,11 +40,11 @@ public class Livro {
         this.categoria = categoria;
     }
 
-    public Image getImagem() {
+    public Drawable getImagem() {
         return imagem;
     }
 
-    public void setImagem(Image imagem) {
+    public void setImagem(Drawable imagem) {
         this.imagem = imagem;
     }
 

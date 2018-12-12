@@ -3,27 +3,20 @@ package communibooks.com.br.communibooks.activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import communibooks.com.br.communibooks.R
 import communibooks.com.br.communibooks.dao.CategoriaDao
-import communibooks.com.br.communibooks.dao.UsuarioDao
-import communibooks.com.br.communibooks.model.Categoria
 import communibooks.com.br.communibooks.model.Usuario
 import communibooks.com.br.communibooks.util.CategoriaAdapter
 import kotlinx.android.synthetic.main.activity_tela_principal.*
 import kotlinx.android.synthetic.main.app_bar_tela_principal.*
-import kotlinx.android.synthetic.main.nav_header_tela_principal.*
-import com.google.gson.JsonParser
-import com.google.gson.Gson
-import java.io.*
+import communibooks.com.br.communibooks.util.Util
 
 
 class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -37,31 +30,20 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_principal)
         setSupportActionBar(toolbar)
+       // usuarioLogado = UsuarioDao.findByNomeUsuario(intent.getStringExtra("usuarioLogado"))
 
+        Util.popularCategoria(assets,"https://categoriapop.000webhostapp.com/")
 
-        lateinit var categoria: Categoria
-        val br = BufferedReader( InputStreamReader(assets.open("categorias.json")))
-        val gson = Gson()
-        val jp = JsonParser()
-        val je = jp.parse(br)
-        val jobj = je.getAsJsonObject()
-        val ja = jobj.getAsJsonArray("Categorias")
-
-        for (i in 0 until ja.size() - 1) {
-            categoria = gson.fromJson<Categoria>(ja.get(i), Categoria::class.java)
-            Log.d("json",categoria.nome)
-            Log.d("json",categoria.imagem)
-            CategoriaDao.add(categoria)
-        }
         viewManager = GridLayoutManager(this,2)
         recyclerView = findViewById(R.id.recycler_categoria_tela_principal)
         viewAdapter = CategoriaAdapter(contexto = this, lista = CategoriaDao.categorias, layout = R.layout.categoria_item){
             categoria ->  i.putExtra("categoria", categoria.nome)
+            i.putExtra("usuarioLogado", usuarioLogado.nomeUsuario)
+            startActivity(i)
         }
         recyclerView.adapter = viewAdapter
         recyclerView.layoutManager = viewManager
 
-       // usuarioLogado = UsuarioDao.findByNomeUsuario(intent.getStringExtra("usuarioLogado"))
 
 
 
