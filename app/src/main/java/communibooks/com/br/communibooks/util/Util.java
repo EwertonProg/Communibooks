@@ -32,8 +32,8 @@ public class Util {
                 json = responseString;
             }
         });
-        Categoria categoria = new Categoria();
         BufferedReader br = new BufferedReader(new InputStreamReader(am.open("categorias.json")));
+        Categoria categoria;
         Gson gson = new Gson();
         JsonParser jp = new JsonParser();
         JsonElement je = (json != null) ? jp.parse(json) : jp.parse(br);

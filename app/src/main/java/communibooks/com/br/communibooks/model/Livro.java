@@ -44,6 +44,14 @@ public class Livro {
         return imagem;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public void setImagem(Drawable imagem) {
         this.imagem = imagem;
     }

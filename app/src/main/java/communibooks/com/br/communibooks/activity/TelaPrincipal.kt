@@ -14,9 +14,10 @@ import communibooks.com.br.communibooks.R
 import communibooks.com.br.communibooks.dao.CategoriaDao
 import communibooks.com.br.communibooks.model.Usuario
 import communibooks.com.br.communibooks.util.CategoriaAdapter
+import communibooks.com.br.communibooks.util.Util
 import kotlinx.android.synthetic.main.activity_tela_principal.*
 import kotlinx.android.synthetic.main.app_bar_tela_principal.*
-import communibooks.com.br.communibooks.util.Util
+import kotlinx.android.synthetic.main.content_tela_principal.*
 
 
 class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -33,8 +34,8 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         Util.popularCategoria(assets,"https://categoriapop.000webhostapp.com/")
 
+        recyclerView = recycler_categoria_tela_principal
         viewManager = GridLayoutManager(this,2)
-        recyclerView = findViewById(R.id.recycler_categoria_tela_principal)
         viewAdapter = CategoriaAdapter(contexto = this, lista = CategoriaDao.categorias, layout = R.layout.categoria_item){
             categoria ->  val i: Intent = Intent(this, ListaLivrosPesquisaActivity::class.java)
             i.putExtra("categoria", categoria.nome)
@@ -42,8 +43,8 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
             startActivity(i)
         }
-        recyclerView.adapter = viewAdapter
         recyclerView.layoutManager = viewManager
+        recyclerView.adapter = viewAdapter
 
 
 
