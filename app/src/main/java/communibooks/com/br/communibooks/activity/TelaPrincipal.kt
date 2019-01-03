@@ -37,9 +37,9 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         recyclerView = recycler_categoria_tela_principal
         viewManager = GridLayoutManager(this,2)
         viewAdapter = CategoriaAdapter(contexto = this, lista = CategoriaDao.categorias, layout = R.layout.categoria_item){
-            categoria ->  val i: Intent = Intent(this, ListaLivrosPesquisaActivity::class.java)
+            categoria ->  val i = Intent(this, ListaLivrosPesquisaActivity::class.java)
             i.putExtra("categoria", categoria.nome)
-            i.putExtra("usuarioLogado", usuarioLogado.nomeUsuario)
+            //i.putExtra("usuarioLogado", usuarioLogado.nomeUsuario)
 
             startActivity(i)
         }

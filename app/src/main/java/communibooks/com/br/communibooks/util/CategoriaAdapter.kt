@@ -15,11 +15,11 @@ class CategoriaAdapter(
     val layout: Int,
     val listner: (Categoria) -> Unit) : RecyclerView.Adapter<CategoriaAdapter.CategoriaHolder>() {
 
-    inner class CategoriaHolder(categoriaItemView: View) : RecyclerView.ViewHolder(categoriaItemView) {
+    inner class CategoriaHolder(val categoriaItemView: View) : RecyclerView.ViewHolder(categoriaItemView) {
         val nomeCategoria = itemView.tv_nome_categoria_recycle
         val iconeCategoria = itemView.img_icone_categoria_recycle
 
-        fun onClick(categoria: Categoria) = with(itemView) {
+        fun onClick(categoria: Categoria) = with(categoriaItemView) {
             setOnClickListener {
                 listner(categoria)
             }
@@ -35,6 +35,7 @@ class CategoriaAdapter(
     override fun onBindViewHolder(holder: CategoriaHolder, position: Int) {
         holder.nomeCategoria.text = lista[position].nome
         Picasso.get().load(lista[position].imagem).into(holder.iconeCategoria)
+        holder.onClick(lista[position])
     }
 
     override fun getItemCount() = lista.size

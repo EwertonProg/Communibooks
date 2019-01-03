@@ -15,6 +15,7 @@ public class Livro {
         PARATROCA("Troca"), PARADOACAO("Doação"), DOADO("Doado"), TROCADO("Trocado");
 
         private final String situacao;
+
         Situacao(String situacaoValor){
             situacao = situacaoValor;
         }
