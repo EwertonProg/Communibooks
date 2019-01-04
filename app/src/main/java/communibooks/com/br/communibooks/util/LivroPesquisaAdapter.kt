@@ -39,7 +39,7 @@ class LivroPesquisaAdapter(
         holder.imagemLivro.background = lista[posicao].imagem
         holder.nomeLivro.text = lista[posicao].nome
         holder.categoriaLivro.text = lista[posicao].categoria.nome
-        holder.descicaoLivro.text = lista[posicao].descrição
+        holder.descicaoLivro.text = lista[posicao].descricao
         holder.situacaoLivro.text = lista[posicao].situacao.name
         holder.nomeUsuarioLivro.text = lista[posicao].usuario.nome
     }

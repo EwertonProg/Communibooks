@@ -12,12 +12,14 @@ import android.view.Menu
 import android.view.MenuItem
 import communibooks.com.br.communibooks.R
 import communibooks.com.br.communibooks.dao.CategoriaDao
+import communibooks.com.br.communibooks.dao.UsuarioDao
 import communibooks.com.br.communibooks.model.Usuario
 import communibooks.com.br.communibooks.util.CategoriaAdapter
 import communibooks.com.br.communibooks.util.Util
 import kotlinx.android.synthetic.main.activity_tela_principal.*
 import kotlinx.android.synthetic.main.app_bar_tela_principal.*
 import kotlinx.android.synthetic.main.content_tela_principal.*
+import kotlinx.android.synthetic.main.nav_header_tela_principal.*
 
 
 class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -30,23 +32,35 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_principal)
         setSupportActionBar(toolbar)
-       // usuarioLogado = UsuarioDao.findByNomeUsuario(intent.getStringExtra("usuarioLogado"))
+        // Corrigir a seguinte linha quando o login voltar a ser a tela inicial
+        usuarioLogado =
+                if (intent.getStringExtra("usuarioLogado").isNullOrEmpty() || UsuarioDao.getUsuarios().isEmpty()) Usuario(
+                    "Ewerton",
+                    "Luis",
+                    "e.luis0990@hotmail.com",
+                    "OrionCaos",
+                    "98762209",
+                    "1998+**"
+                ) else UsuarioDao.findByNomeUsuario(intent.getStringExtra("usuarioLogado"))
 
-        Util.popularCategoria(assets,"https://categoriapop.000webhostapp.com/")
+        Util.popularCategoria(assets, "https://categoriapop.000webhostapp.com/")
 
         recyclerView = recycler_categoria_tela_principal
-        viewManager = GridLayoutManager(this,2)
-        viewAdapter = CategoriaAdapter(contexto = this, lista = CategoriaDao.categorias, layout = R.layout.categoria_item){
-            categoria ->  val i = Intent(this, ListaLivrosPesquisaActivity::class.java)
-            i.putExtra("categoria", categoria.nome)
-            //i.putExtra("usuarioLogado", usuarioLogado.nomeUsuario)
+        viewManager = GridLayoutManager(this, 2)
+        viewAdapter = CategoriaAdapter(
+            contexto = this,
+            lista = CategoriaDao.categorias,
+            layout = R.layout.categoria_item
+        ) { categoria ->
+            val i = Intent(this, ListaLivrosPesquisaActivity::class.java)
+            i.putExtra("tipoPesquisa","meusLivros")
+            i.putExtra("pesquisa", categoria.nome)
+            i.putExtra("usuarioLogado", usuarioLogado.nomeUsuario)
 
             startActivity(i)
         }
         recyclerView.layoutManager = viewManager
         recyclerView.adapter = viewAdapter
-
-
 
 
         val toggle = ActionBarDrawerToggle(
@@ -71,7 +85,7 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.tela_principal, menu)
-        //tv_nome_menu.setText(usuarioLogado.nome+" "+usuarioLogado.sobrenome)
+        tv_nome_menu.setText(usuarioLogado.nome+" "+usuarioLogado.sobrenome)
         return true
     }
 
@@ -86,7 +100,7 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        lateinit var i:Intent
+        lateinit var i: Intent
 
         when (item.itemId) {
             R.id.inicio_item -> {
@@ -96,8 +110,9 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
             }
             R.id.meus_livros_item -> {
-                i = Intent(this,CadastrarLivroActivity::class.java)
+                i = Intent(this, ListaLivrosPesquisaActivity::class.java)
                 i.putExtra("usuarioLogado", usuarioLogado.nomeUsuario)
+                i.putExtra("tipoPesquisa", "meusLivros")
                 startActivity(i)
             }
             R.id.categorias_item -> {

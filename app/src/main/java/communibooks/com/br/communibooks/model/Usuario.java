@@ -107,4 +107,10 @@ public class Usuario {
     public void setLivros(List<Livro> livros) {
         this.livros = livros;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Usuario u = (Usuario)obj;
+        return this.nomeUsuario.equals(u.nomeUsuario);
+    }
 }

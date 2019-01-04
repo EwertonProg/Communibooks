@@ -7,18 +7,12 @@ public class Livro {
     private String nome;
     private Categoria categoria;
     private Drawable imagem;
-    private String descrição;
+    private String descricao;
     private Usuario usuario;
     private Situacao situacao;
 
-    public enum Situacao {
-        PARATROCA("Troca"), PARADOACAO("Doação"), DOADO("Doado"), TROCADO("Trocado");
-
-        private final String situacao;
-
-        Situacao(String situacaoValor){
-            situacao = situacaoValor;
-        }
+    public String getDescricao() {
+        return descricao;
     }
 
     public Livro() {
@@ -57,12 +51,32 @@ public class Livro {
         this.imagem = imagem;
     }
 
-    public String getDescrição() {
-        return descrição;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public void setDescrição(String descrição) {
-        this.descrição = descrição;
+    public enum Situacao {
+        PARATROCA("Troca"), PARADOACAO("Doação"), DOADO("Doado"), TROCADO("Trocado");
+
+        private final String situacao;
+
+        Situacao(String situacaoValor){
+            situacao = situacaoValor;
+        }
+
+        public static Situacao toEnum(String nomeSituacao){
+            switch (nomeSituacao){
+                case "Troca" : return Situacao.PARATROCA;
+                case "Doação": return Situacao.PARADOACAO;
+                case "Doado": return Situacao.DOADO;
+                default: return Situacao.TROCADO;
+            }
+        }
+
+        @Override
+        public String toString() {
+            return this.situacao;
+        }
     }
 
     public Usuario getUsuario() {

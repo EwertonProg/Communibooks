@@ -13,7 +13,8 @@ import android.widget.ImageButton
 import android.widget.Toast
 import communibooks.com.br.communibooks.R
 import communibooks.com.br.communibooks.dao.CategoriaDao
-import communibooks.com.br.communibooks.dao.LivroDao
+import communibooks.com.br.communibooks.dao.UsuarioDao
+import communibooks.com.br.communibooks.domain.LivroDomain
 import communibooks.com.br.communibooks.model.Livro
 import communibooks.com.br.communibooks.model.Usuario
 import communibooks.com.br.communibooks.util.Util
@@ -32,7 +33,17 @@ class CadastrarLivroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastrar_livro)
         setSupportActionBar(toolbar)
-        // usuarioLogado = UsuarioDao.findByNomeUsuario(intent.getStringExtra("usuarioLogado"))
+        // Corrigir a seguinte linha quando o login voltar a ser a tela inicial
+        usuarioLogado =
+                if (intent.getStringExtra("usuarioLogado").isNullOrEmpty() || UsuarioDao.getUsuarios().isEmpty()) Usuario(
+                    "Ewerton",
+                    "Luis",
+                    "e.luis0990@hotmail.com",
+                    "OrionCaos",
+                    "98762209",
+                    "1998+**"
+                ) else UsuarioDao.findByNomeUsuario(intent.getStringExtra("usuarioLogado"))
+
         Util.popularCategoria(assets, "https://categoriapop.000webhostapp.com/")
         val spinnerCategoria = sp_categoria_livro_cadastro
         val listaCategoria: ArrayList<String> = ArrayList()
@@ -42,8 +53,8 @@ class CadastrarLivroActivity : AppCompatActivity() {
         spinnerCategoria.adapter = arrayAdapterCategoria
 
         val listaSituacao: ArrayList<String> = ArrayList()
-        listaSituacao.add(Livro.Situacao.PARADOACAO.name)
-        listaSituacao.add(Livro.Situacao.PARATROCA.name)
+        listaSituacao.add(Livro.Situacao.PARADOACAO.toString())
+        listaSituacao.add(Livro.Situacao.PARATROCA.toString())
 
         val arrayAdapterSituacao = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaSituacao)
         sp_situacao_livro_cadastro.adapter = arrayAdapterSituacao
@@ -66,7 +77,7 @@ class CadastrarLivroActivity : AppCompatActivity() {
 
                 pastaSelecionada = localImagem.path
                 val inputStream = getContentResolver().openInputStream(localImagem)
-                val myImg = Drawable.createFromStream(inputStream, localImagem.toString() )
+                val myImg = Drawable.createFromStream(inputStream, localImagem.toString())
                 imageLivro.background = myImg
 
                 Log.d("pastaSelecionada ", pastaSelecionada)
@@ -92,18 +103,16 @@ class CadastrarLivroActivity : AppCompatActivity() {
         ) {
             val livro: Livro = Livro()
             livro.nome = ed_nome_livro_cadastro.text.toString()
-            livro.descrição = ed_descricao_livro_cadastro.text.toString()
+            livro.descricao = ed_descricao_livro_cadastro.text.toString()
             livro.categoria = CategoriaDao.findByName(sp_categoria_livro_cadastro.selectedItem as String)
             livro.imagem = imgbtn_imagem_livro_cadastro.background
-            TODO("Adicionar o usuario logado ao usuario dono do livro")
-            livro.usuario = Usuario("Ewerton", "Luis", "e.luis0990@hotmail.com", "OrionCaos", "98762209", "1998+**")
-
-            livro.situacao = Livro.Situacao.valueOf(sp_situacao_livro_cadastro.selectedItem as String)
-            LivroDao.add(livro)
+            livro.usuario = usuarioLogado
+            livro.situacao = Livro.Situacao.toEnum(sp_situacao_livro_cadastro.selectedItem as String)
+            LivroDomain.cadastrar(livro)
             Toast.makeText(this, "Adicionado", Toast.LENGTH_SHORT).show()
             Log.d("enum", sp_categoria_livro_cadastro.selectedItem as String)
             Log.d("enum", sp_situacao_livro_cadastro.selectedItem as String)
-            val intent = Intent(this,TelaPrincipal::class.java)
+            val intent = Intent(this, TelaPrincipal::class.java)
             startActivity(intent)
         }
     }
