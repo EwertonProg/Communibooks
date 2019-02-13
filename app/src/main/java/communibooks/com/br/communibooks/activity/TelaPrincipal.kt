@@ -53,7 +53,7 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             layout = R.layout.categoria_item
         ) { categoria ->
             val i = Intent(this, ListaLivrosPesquisaActivity::class.java)
-            i.putExtra("tipoPesquisa","meusLivros")
+            i.putExtra("tipoPesquisa","porCategoria")
             i.putExtra("pesquisa", categoria.nome)
             i.putExtra("usuarioLogado", usuarioLogado.nomeUsuario)
 
@@ -120,6 +120,10 @@ class TelaPrincipal : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             }
             R.id.his_transacoes_item -> {
 
+            }
+
+            R.id.adicionar_livro_item -> {
+                startActivity(Intent(this, CadastrarLivroActivity::class.java))
             }
         }
 

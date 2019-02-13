@@ -9,23 +9,12 @@
         tools:context=".activity.ListaLivrosPesquisaActivity"
         android:background="@color/cor_padrao">
 
-    <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/recycler_livros_pesquisa"
-            android:id="@+id/pesquisa_categoria"
-            android:background="@android:color/background_light"
-    />
-
     <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_livros_pesquisa"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/pesquisa_categoria"
+            app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             >

@@ -5,8 +5,13 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
@@ -19,10 +24,12 @@ import communibooks.com.br.communibooks.model.Livro
 import communibooks.com.br.communibooks.model.Usuario
 import communibooks.com.br.communibooks.util.Util
 import kotlinx.android.synthetic.main.activity_cadastrar_livro.*
-import kotlinx.android.synthetic.main.app_bar_tela_principal.*
+import kotlinx.android.synthetic.main.app_bar_cadastrar_livro.*
+import kotlinx.android.synthetic.main.content_cadastrar_livro.*
+import kotlinx.android.synthetic.main.nav_header_tela_principal.*
 
 
-class CadastrarLivroActivity : AppCompatActivity() {
+class CadastrarLivroActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var localImagem: Uri
     lateinit var pastaSelecionada: String
     lateinit var imageLivro: ImageButton
@@ -32,17 +39,18 @@ class CadastrarLivroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastrar_livro)
-        setSupportActionBar(toolbar)
+        toolbar_cadastrar_livro.title = "Adicionar novo Livro"
+        setSupportActionBar(toolbar_cadastrar_livro)
         // Corrigir a seguinte linha quando o login voltar a ser a tela inicial
         usuarioLogado =
-                if (intent.getStringExtra("usuarioLogado").isNullOrEmpty() || UsuarioDao.getUsuarios().isEmpty()) Usuario(
-                    "Ewerton",
-                    "Luis",
-                    "e.luis0990@hotmail.com",
-                    "OrionCaos",
-                    "98762209",
-                    "1998+**"
-                ) else UsuarioDao.findByNomeUsuario(intent.getStringExtra("usuarioLogado"))
+            if (intent.getStringExtra("usuarioLogado").isNullOrEmpty() || UsuarioDao.getUsuarios().isEmpty()) Usuario(
+                "Ewerton",
+                "Luis",
+                "e.luis0990@hotmail.com",
+                "OrionCaos",
+                "98762209",
+                "1998+**"
+            ) else UsuarioDao.findByNomeUsuario(intent.getStringExtra("usuarioLogado"))
 
         Util.popularCategoria(assets, "https://categoriapop.000webhostapp.com/")
         val spinnerCategoria = sp_categoria_livro_cadastro
@@ -60,6 +68,16 @@ class CadastrarLivroActivity : AppCompatActivity() {
         sp_situacao_livro_cadastro.adapter = arrayAdapterSituacao
 
         imageLivro = imgbtn_imagem_livro_cadastro
+
+        val toggle = ActionBarDrawerToggle(
+            this, drawer_layout_cadastrar_livro, toolbar_cadastrar_livro,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawer_layout_cadastrar_livro.addDrawerListener(toggle)
+        toggle.syncState()
+
+        nav_view.setNavigationItemSelectedListener(this)
 
     }
 
@@ -95,7 +113,7 @@ class CadastrarLivroActivity : AppCompatActivity() {
         startActivityForResult(Intent.createChooser(intent, "Selecione a imagem do livro"), 10)
     }
 
-    public fun cadastrarLivro(view: View) {
+    fun cadastrarLivro(view: View) {
         if (Util.validarEditText(
                 ed_descricao_livro_cadastro,
                 ed_nome_livro_cadastro
@@ -115,5 +133,62 @@ class CadastrarLivroActivity : AppCompatActivity() {
             val intent = Intent(this, TelaPrincipal::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onBackPressed() {
+        if (drawer_layout_cadastrar_livro.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout_cadastrar_livro.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.tela_principal, menu)
+        tv_nome_menu.setText(usuarioLogado.nome + " " + usuarioLogado.sobrenome)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        when (item.itemId) {
+            R.id.action_settings -> return true
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        lateinit var i: Intent
+
+        when (item.itemId) {
+            R.id.inicio_item -> {
+                startActivity(Intent(this, TelaPrincipal::class.java))
+            }
+
+            R.id.perfil_item -> {
+
+            }
+
+            R.id.meus_livros_item -> {
+                i = Intent(this, ListaLivrosPesquisaActivity::class.java)
+                i.putExtra("usuarioLogado", usuarioLogado.nomeUsuario)
+                i.putExtra("tipoPesquisa", "meusLivros")
+                startActivity(i)
+            }
+
+            R.id.categorias_item -> {
+
+            }
+            R.id.his_transacoes_item -> {
+
+            }
+
+        }
+
+        drawer_layout_cadastrar_livro.closeDrawer(GravityCompat.START)
+        return true
     }
 }

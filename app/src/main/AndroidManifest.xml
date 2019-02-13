@@ -27,11 +27,12 @@
                 android:name=".activity.CadastroActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".activity.ListaLivrosPesquisaActivity">
-                  android:theme="@style/AppTheme.NoActionBar">
+
+        <activity
+            android:name=".activity.ListaLivrosPesquisaActivity">
         </activity>
+
         <activity android:name=".activity.CadastrarLivroActivity">
-                  android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>

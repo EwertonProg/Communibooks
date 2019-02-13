@@ -21,6 +21,11 @@
         <item
                 android:id="@+id/his_transacoes_item"
                 android:title="Historico de Transações"/>
+
+        <item
+                android:id="@+id/adicionar_livro_item"
+                android:title="Adicionar Livro"/>
+
     </group>
 
 </menu>

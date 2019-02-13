@@ -57,6 +57,6 @@ class ListaLivrosPesquisaActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        
+        this.finish()
     }
 }
